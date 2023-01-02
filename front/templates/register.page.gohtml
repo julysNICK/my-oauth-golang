@@ -1,7 +1,7 @@
 {{template "base" . }}
 
 {{define "title"}}
-    hello word
+    Register
 {{end}}
 
 {{define "content"}}
@@ -11,10 +11,13 @@
      <div class="card"  style="width:50%;">
 
         <div class="card-body">
-            <p class="card-text">Faça seu login com o nix</p>
+            <p class="card-text">faça seu registro com o nix</p>
             <hr>
 
-           
+             <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="type your first name" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                <input type="text" class="form-control" placeholder="type your last name" aria-label="Recipient's username" aria-describedby="basic-addon2">
+            </div>
                <div class="input-group mb-3">
                  <input type="text" class="form-control" placeholder="type your nix" aria-label="Recipient's username" aria-describedby="basic-addon2">
                 <span class="input-group-text" id="basic-addon2">@nix.com</span>
@@ -24,15 +27,16 @@
                     <input type="password" class="form-control" placeholder="type your password" aria-label="Recipient's username" aria-describedby="basic-addon2">
                     <span class="input-group-text" id="basic-addon2"><i class="fas fa-eye"></i></span>
                  </div>
-        
 
+               
+                <div class="input-group mb-3">
+                <input type="date" class="form-control-lg form-control" placeholder="type your date of birth" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                </div>
 
         </div>
 
         <div class="card-footer d-flex px-2 justify-content-around align-items-center">
-            <a href="/auth/google/login" class="btn btn-primary btn-lg">Login</a>
-
-            <a href="/register" class="btn btn-primary btn-lg">Registrar</a>
+            <a href="/" class="btn btn-primary btn-lg">Registrar</a>
         </div>
      </div>
     </div>
