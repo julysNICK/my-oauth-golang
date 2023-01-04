@@ -10,6 +10,9 @@ import (
 )
 
 func main() {
+	// headersOk := handlers.AllowedHeaders([]string{"Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept"})
+	// originsOk := handlers.AllowedOrigins([]string{"*"})
+	// methodsOk := handlers.AllowedMethods([]string{"GET", "HEAD", "POST", "PUT", "OPTIONS"})
 
 	var err error
 

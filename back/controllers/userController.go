@@ -31,6 +31,8 @@ var users = []dto.User{
 }
 
 func GetUsers(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "http://localhost:4000")
+	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(users)
 }
 
@@ -51,6 +53,7 @@ func (ServerConfig *ServerConfig) Register(w http.ResponseWriter, r *http.Reques
 		w.Write([]byte(err.Error()))
 		return
 	}
+	w.Header().Set("Access-Control-Allow-Origin", "http://localhost:4000")
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(user)
@@ -58,17 +61,22 @@ func (ServerConfig *ServerConfig) Register(w http.ResponseWriter, r *http.Reques
 }
 
 func (ServerConfig *ServerConfig) Login(w http.ResponseWriter, r *http.Request) {
+
 	var user models.User
 
 	json.NewDecoder(r.Body).Decode(&user)
+	fmt.Println(&r.Body)
 
 	user, err := services.LoginUser(ServerConfig.DB, user.Email, user.Password)
 
 	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusForbidden)
 		w.Write([]byte(err.Error()))
 		return
 	}
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(user)
