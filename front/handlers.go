@@ -13,3 +13,19 @@ func (app *Application) Register(w http.ResponseWriter, r *http.Request) {
 		app.ErrorLog.Println(err)
 	}
 }
+
+func (app *Application) PostLoginPage(w http.ResponseWriter, r *http.Request){
+
+	err := r.ParseForm()
+
+	if err != nil {
+		app.ErrorLog.Println(err)
+	}
+
+	email := r.Form.Get("email")
+	password := r.Form.Get("password")
+
+	app.InfoLog.Println(email, password)
+
+	http.Redirect(w, r, "/", http.StatusSeeOther)
+}

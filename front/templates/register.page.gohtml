@@ -15,30 +15,83 @@
             <hr>
 
              <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="type your first name" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                <input type="text" class="form-control" placeholder="type your last name" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                <input type="text" id="firstName" class="form-control" placeholder="type your first name" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                <input type="text" id="lastName" class="form-control" placeholder="type your last name" aria-label="Recipient's username" aria-describedby="basic-addon2">
             </div>
                <div class="input-group mb-3">
-                 <input type="text" class="form-control" placeholder="type your nix" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                 <input type="text" id="email" class="form-control" placeholder="type your nix" aria-label="Recipient's username" aria-describedby="basic-addon2">
                 <span class="input-group-text" id="basic-addon2">@nix.com</span>
                 </div>
 
                  <div class="input-group mb-3">
-                    <input type="password" class="form-control" placeholder="type your password" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                    <input type="password" id="password" class="form-control" placeholder="type your password" aria-label="Recipient's username" aria-describedby="basic-addon2">
                     <span class="input-group-text" id="basic-addon2"><i class="fas fa-eye"></i></span>
                  </div>
 
                
                 <div class="input-group mb-3">
-                <input type="date" class="form-control-lg form-control" placeholder="type your date of birth" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                <input type="date" id="dateRegister" class="form-control-lg form-control" placeholder="type your date of birth" aria-label="Recipient's username" aria-describedby="basic-addon2">
                 </div>
 
         </div>
 
         <div class="card-footer d-flex px-2 justify-content-around align-items-center">
-            <a href="/" class="btn btn-primary btn-lg">Registrar</a>
+            <a id="registerButton" class="btn btn-primary btn-lg">Registrar</a>
         </div>
      </div>
     </div>
+{{end}}
 
+    {{define "js"}}
+    <script>
+
+    function register() {
+        var email = document.getElementById("email").value;
+        var password = document.getElementById("password").value;
+        var firstName = document.getElementById("firstName").value;
+        var lastName = document.getElementById("lastName").value;
+        var dateRegister = document.getElementById("dateRegister").value;
+
+       
+        if (email == "" || password == "" || firstName == "" || lastName == "" ) {
+            alert("Preencha todos os campos");
+            return false;
+        }
+
+        var data = {
+            name: `${firstName} ${lastName}`,
+            email: `${email}@nix.com`,
+            password: password
+        }
+
+        fetch("http://localhost:8080/register", {
+            method: "post",
+            headers: {
+                 'Accept': 'application/json',
+                 'Content-Type': 'application/json'   
+            },
+            body: JSON.stringify(data)
+        }).then(function (response) {
+            return response.json();
+        }).then(function (data) {
+              if (data.email) {
+                 alert("Cadastro realizado com sucesso");
+                 window.location.href = "/";
+              } else {
+                 alert("Erro ao cadastrar");
+              }
+        }).catch(function (error) {
+             console.log(error);
+             alert("Erro ao cadastrar");
+        });
+    }
+
+
+     var getButton = document.getElementById("registerButton");
+
+        getButton.addEventListener("click", function(){
+          register();
+        });
+
+    </script>
 {{end}}

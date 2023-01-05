@@ -65,7 +65,6 @@ func (ServerConfig *ServerConfig) Login(w http.ResponseWriter, r *http.Request) 
 	var user models.User
 
 	json.NewDecoder(r.Body).Decode(&user)
-	fmt.Println(&r.Body)
 
 	user, err := services.LoginUser(ServerConfig.DB, user.Email, user.Password)
 
