@@ -16,8 +16,8 @@ func CreateToken(userId uint) (string, error) {
 	claims["user_id"] = userId
 	claims["exp"] = time.Now().Add(time.Minute * 15).Unix()
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-
-	return token.SignedString([]byte(os.Getenv("ACCESS_SECRET")))
+	fmt.Println(os.Getenv("API_SECRET"))
+	return token.SignedString([]byte(os.Getenv("API_SECRET")))
 }
 
 func TokenValid(r *http.Request) error {
@@ -26,7 +26,7 @@ func TokenValid(r *http.Request) error {
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
 			return nil, fmt.Errorf("There was an error")
 		}
-		return []byte(os.Getenv("ACCESS_SECRET")), nil
+		return []byte(os.Getenv("API_SECRET")), nil
 	})
 	if err != nil {
 		return err
@@ -44,6 +44,7 @@ func ExtractToken(r *http.Request) string {
 	}
 	bearerToken := r.Header.Get("Authorization")
 	if len(strings.Split(bearerToken, " ")) == 2 {
+		print(strings.Split(bearerToken, " ")[1])
 		return strings.Split(bearerToken, " ")[1]
 	}
 	return ""

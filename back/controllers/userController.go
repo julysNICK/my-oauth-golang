@@ -81,3 +81,45 @@ func (ServerConfig *ServerConfig) Login(w http.ResponseWriter, r *http.Request) 
 	json.NewEncoder(w).Encode(user)
 
 }
+
+func (ServerConfig *ServerConfig) VerifyAuth(w http.ResponseWriter, r *http.Request) {
+
+	var user models.User
+
+	err := services.VerifyAuth(ServerConfig.DB, r)
+
+	if err != nil {
+		print("caiu aqui")
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusForbidden)
+		json.NewEncoder(w).Encode(err.Error())
+		return
+	}
+
+	idUser, err := services.ExtractTokenId(r)
+
+	if err != nil {
+		print("caiu aqui 2")
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusForbidden)
+		json.NewEncoder(w).Encode(err.Error())
+		return
+	}
+
+	user, err = services.GetUser(ServerConfig.DB, idUser)
+	if err != nil {
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusForbidden)
+		w.Write([]byte(err.Error()))
+		return
+	}
+
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(user)
+
+}

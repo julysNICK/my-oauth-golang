@@ -25,6 +25,12 @@ func checkPasswordHash(password, hash string) bool {
 	return err == nil
 }
 
+func GetUser(db *gorm.DB, id uint) (models.User, error) {
+	var user models.User
+	result := db.Where("id = ?", id).First(&user)
+	return user, result.Error
+}
+
 func RegisterUser(db *gorm.DB, user models.User) (models.User, error) {
 
 	hashedPassword, _ := hashPassword(user.Password)
@@ -92,4 +98,20 @@ func RefreshToken(db *gorm.DB, r *http.Request) (string, error) {
 	_ = db.Model(&user).Update("token", newToken)
 	return newToken, nil
 
+}
+
+func VerifyAuth(db *gorm.DB, r *http.Request) error {
+	err := auth.TokenValid(r)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func ExtractTokenId(r *http.Request) (uint, error) {
+	tokenId, err := auth.ExtractTokenId(r)
+	if err != nil {
+		return 0, err
+	}
+	return tokenId, nil
 }
