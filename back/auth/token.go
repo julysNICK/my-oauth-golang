@@ -44,7 +44,7 @@ func ExtractToken(r *http.Request) string {
 	}
 	bearerToken := r.Header.Get("Authorization")
 	if len(strings.Split(bearerToken, " ")) == 2 {
-		print(strings.Split(bearerToken, " ")[1])
+
 		return strings.Split(bearerToken, " ")[1]
 	}
 	return ""

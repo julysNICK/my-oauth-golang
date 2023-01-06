@@ -2,7 +2,6 @@ package controllers
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 	"serviceOauth/dto"
 	"serviceOauth/models"
@@ -46,7 +45,6 @@ func (ServerConfig *ServerConfig) Register(w http.ResponseWriter, r *http.Reques
 	json.NewDecoder(r.Body).Decode(&user)
 
 	user, err := services.RegisterUser(ServerConfig.DB, user)
-	fmt.Println(user)
 
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
@@ -89,7 +87,7 @@ func (ServerConfig *ServerConfig) VerifyAuth(w http.ResponseWriter, r *http.Requ
 	err := services.VerifyAuth(ServerConfig.DB, r)
 
 	if err != nil {
-		print("caiu aqui")
+
 		w.Header().Set("Access-Control-Allow-Origin", "*")
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusForbidden)
@@ -100,7 +98,7 @@ func (ServerConfig *ServerConfig) VerifyAuth(w http.ResponseWriter, r *http.Requ
 	idUser, err := services.ExtractTokenId(r)
 
 	if err != nil {
-		print("caiu aqui 2")
+
 		w.Header().Set("Access-Control-Allow-Origin", "*")
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusForbidden)
