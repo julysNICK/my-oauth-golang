@@ -52,7 +52,7 @@
         }
 
         var data = {
-            email: email,
+            email: `${email}@nix.com`,
             password: password
         }
 
@@ -66,8 +66,9 @@
         }).then(function (response) {
             return response.json();
         }).then(function (data) {
-           
            console.log(data)
+            localStorage.setItem("token", data.token);
+            
         });
     }
 
@@ -76,7 +77,34 @@
 
         getButton.addEventListener("click", function(){
           val();
-        });
+        }); 
+
+      function getInformation(){
+        fetch("http://localhost:8080/verifyAuth", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + localStorage.getItem("token")
+          }
+        })
+        .then(response => response.json())
+        .then(data => {
+          
+
+         var condition =  data === "Token is expired"
+
+
+
+        })
+      }
+
+      
+          function verifyAuth() {
+             console.log('verificando token')
+             getInformation()
+            }
+
+    verifyAuth()
 
     </script>
 

@@ -1,0 +1,76 @@
+{{template "base" . }}
+
+{{define "title"}}
+    Auth
+{{end}}
+
+{{define "content"}}
+   
+   <div class="container">
+    <div class="row justify-content-center align-items-center">
+
+      <h1 class="text-center">Você está logado</h1>
+      <Form action="auth" method="POST" 
+      name="charge_form" id="charge_form"
+      class="d-block needs-validation charge-form"
+      autocomplete="off" novalidate="">
+        
+        <input type="hidden" name="token" id="token">
+        <input type="hidden" name="email" id="email">
+        <input type="hidden" name="name" id="name">
+        <input type="hidden" name="id" id="id">
+
+        <h1 class="text-center name-user"></h1>
+        <h1 class="text-center email-user"></h1>
+        <h1 class="text-center id-user"></h1>
+        <h1 class="text-center token-user"></h1>
+
+
+      </Form>
+
+     </div>
+    </div>
+
+{{end}}
+
+{{define "js"}}
+    <script>
+
+
+      function getInformation(){
+        fetch("http://localhost:8080/verifyAuth", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + localStorage.getItem("token")
+          }
+        })
+        .then(response => response.json())
+        .then(data => {
+
+          document.getElementById("token").value = data.token
+          document.getElementById("email").value = data.email
+          document.getElementById("name").value = data.name
+          document.getElementById("id").value = data.id
+
+          document.querySelector(".name-user").innerHTML = data.name
+          document.querySelector(".email-user").innerHTML = data.email
+          document.querySelector(".id-user").innerHTML = data.id
+          document.querySelector(".token-user").innerHTML = data.token
+          document.querySelector("form").submit()
+
+       
+
+          
+        })
+      }
+
+      getInformation()
+
+
+ 
+   
+
+    </script>
+
+{{end}}
