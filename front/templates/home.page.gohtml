@@ -93,7 +93,10 @@
 
          var condition =  data === "Token is expired"
 
-
+            console.log(data)
+         if(!condition){
+            window.location.href = "/auth-temp"
+         }
 
         })
       }

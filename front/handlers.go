@@ -35,6 +35,11 @@ func (app *Application) Auth(w http.ResponseWriter, r *http.Request) {
 		app.ErrorLog.Println(err)
 	}
 
+}
+func (app *Application) AuthTemp(w http.ResponseWriter, r *http.Request) {
+	if err := app.renderTemplate(w, r, "auth-temp", &templateData{}); err != nil {
+		app.ErrorLog.Println(err)
+	}
 
 }
 
@@ -51,7 +56,7 @@ func (app *Application) PostAuthPage(w http.ResponseWriter, r *http.Request) {
 	token := r.Form.Get("token")
 	idUser := r.Form.Get("id")
 
-	app.InfoLog.Println(email, password , token, idUser)
+	app.InfoLog.Println(email, password, token, idUser)
 
-	http.Redirect(w, r, "/auth-success", http.StatusSeeOther)
+	http.Redirect(w, r, "/auth", http.StatusSeeOther)
 }
