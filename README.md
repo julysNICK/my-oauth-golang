@@ -86,7 +86,7 @@ Essa aplicação foi construída com a seguinte tecnologia:
 
 ### Documentação
 
-Project Link: [https://documenter.getpostman.com/view/10341168/2s8ZDX43MC](https://documenter.getpostman.com/view/10341168/2s8ZDX43MC)
+api documentation: [https://documenter.getpostman.com/view/10341168/2s8ZDX43MC](https://documenter.getpostman.com/view/10341168/2s8ZDX43MC)
 
 
 ##  Demonstração
