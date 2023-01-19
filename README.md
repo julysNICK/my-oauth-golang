@@ -65,7 +65,7 @@ Golang
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/julysNICK/Amazon-Clone.git
+   git clone https://github.com/julysNICK/sales-car
    ```
 2. Install go packages
    ```sh
