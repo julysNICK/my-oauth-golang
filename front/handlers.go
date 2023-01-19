@@ -1,6 +1,9 @@
 package main
 
-import "net/http"
+import (
+	"encoding/json"
+	"net/http"
+)
 
 func (app *Application) Home(w http.ResponseWriter, r *http.Request) {
 	if err := app.renderTemplate(w, r, "home", &templateData{}); err != nil {
@@ -56,7 +59,13 @@ func (app *Application) PostAuthPage(w http.ResponseWriter, r *http.Request) {
 	token := r.Form.Get("token")
 	idUser := r.Form.Get("id")
 
-	app.InfoLog.Println(email, password, token, idUser)
-
+	app.InfoLog.Println(email, password, token, idUser)	
+	
+	json.NewEncoder(w).Encode(map[string]string{"email": email, "password": password, "token": token, "id": idUser})
+	
 	http.Redirect(w, r, "/auth", http.StatusSeeOther)
+	
+	
+
+
 }

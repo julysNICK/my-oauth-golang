@@ -69,7 +69,9 @@
            console.log(data)
             localStorage.setItem("token", data.token);
             
-        });
+        }).catch(function (error) {
+            console.log(error);
+        }); 
     }
 
 
@@ -80,11 +82,19 @@
         }); 
 
       function getInformation(){
+
+        const getToken = localStorage.getItem("token")
+
+        if(getToken === null){        
+            return
+        }
+
+
         fetch("http://localhost:9090/verifyAuth", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            "Authorization": "Bearer " + localStorage.getItem("token")
+            "Authorization": "Bearer " + getToken
           }
         })
         .then(response => response.json())
@@ -92,13 +102,14 @@
           
 
          var condition =  data === "Token is expired"
+         console.log(condition)
 
             console.log(data)
          if(!condition){
             window.location.href = "/auth-temp"
          }
 
-        })
+        });
       }
 
       

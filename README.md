@@ -108,6 +108,15 @@ VerifyAuth
 ![](/my-oauth-image/VerifyAuth.png)
 
 
+Login screen template
+
+![](/my-oauth-image/ScreenLogin.png)
+
+Register screen template
+
+![](/my-oauth-image/ScreenRegister.png)
+
+
 <!-- LICENSE -->
 
 <!-- CONTACT -->
