@@ -45,7 +45,7 @@ Golang
 
  ###  Features
 
-- [x] Cadastro de usuario
+- [x] Cadastro de usuário
 
 - [x] Login de usuário
 
