@@ -59,14 +59,6 @@ Golang
 
   Siga as instruções abaixo para que consiga configurar o projeto localmente.
 
-### Pré-requisito
-
-Para configurar o projeto o pré-requisito é possuir instalado o node js e react js depois rode o comando oabaixo
-* go
-  ```sh
-  npm install npm@latest -g
-  ```
-
 ###  Instalação
 
 1. Clone the repo
@@ -96,8 +88,13 @@ Login
 
 ![](/my-oauth-image/LoginNix.png)
 
+
+
 Register
 ![](/my-oauth-image/RegisterNix.png)
+
+
+
 
 VerifyAuth
 
