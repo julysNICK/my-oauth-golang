@@ -45,13 +45,13 @@ Golang
 
  ###  Features
 
-- [x] Cadastro de carro para venda
+- [x] Cadastro de usuario
 
 - [x] Login de usuário
 
-- [x] Listar suas publicações
+- [x] Verificação de autenticação
 
-- [x] Busca de carro por marca e sua exibição
+- [x] Renderização de templates
 
 - [x] tratamento de erros
 
