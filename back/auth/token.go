@@ -10,10 +10,12 @@ import (
 	jwt "github.com/dgrijalva/jwt-go"
 )
 
-func CreateToken(userId uint) (string, error) {
+func CreateToken(userId uint, user_name string, user_email string) (string, error) {
 	claims := jwt.MapClaims{}
 	claims["authorized"] = true
 	claims["user_id"] = userId
+	claims["user_name"] = user_name
+	claims["user_email"] = user_email
 	claims["exp"] = time.Now().Add(time.Minute * 15).Unix()
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 	fmt.Println(os.Getenv("API_SECRET"))

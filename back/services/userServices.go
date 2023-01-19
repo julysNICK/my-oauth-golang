@@ -55,7 +55,7 @@ func LoginUser(db *gorm.DB, email string, password string) (models.User, error) 
 		return user, errors.New("Invalid Password")
 	}
 
-	token, err := auth.CreateToken(user.ID)
+	token, err := auth.CreateToken(user.ID, user.Name, user.Email)
 
 	if err != nil {
 		return user, err
