@@ -1,7 +1,7 @@
 # My-Oauth-Go
 ## Descrição do Projeto
 
-<p align="center">O projeto do oauth foi feito com objetivo de aprender novos  conceitos colocando eles em pratica com o golang</p
+<p align="center">O projeto do oauth foi feito com objetivo de aprender novos  conceitos e colacar eles em pratica com o golang</p
  <h4 align="center">
 	✅  My-Oauth-Go 🚀 Concluido...  ✅
       
